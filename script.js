@@ -3,6 +3,8 @@ console.log("Script is linked!");
 const suit = ["Hearts", "Spades", "Diamonds", "Clubs"];
 const rank = [2, 3, 4, 5, 6, 7, 8, 9, 10, "Jack", "King", "Queen", "Ace"];
 const value = [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14];
+let player1 = [];
+let player2 = [];
 
 class Cards {
     constructor () {
@@ -12,6 +14,7 @@ class Cards {
     }
 }
 
+
 class Deck {
     constructor() {
         this.deck = [];
@@ -19,6 +22,7 @@ class Deck {
             for (let j = 0; j < rank.length; j++) {
                 let card = {Rank: rank[j], Suit: suit[i], Value: value[j]}
                 this.deck.push(card);
+                // console.log(`${card.Rank} of ${card.Suit}(${card.Value})`)
             }
         }
         this.shuffle = () => {
@@ -30,8 +34,6 @@ class Deck {
             this.deck[j] = x;
             }
         }
-        let player1 = [];
-        let player2 = [];
         this.divide = () => {
             player1 = this.deck.splice(0, 26);
             for (let i = 0; i < this.deck.length; i++) {
@@ -43,7 +45,8 @@ class Deck {
             console.log(player2);
             return player1, player2;
         }
-        console.log("Making deck... Shuffling deck...");
+        console.log("Making deck...");
+        console.log("Shuffling deck..."); 
         this.shuffle();
         console.log("Dividing deck for two...");
         this.divide();
@@ -52,25 +55,59 @@ class Deck {
 }
 
 //making Game class to handle the war mechanic?
-// class Game {
-//     constructor () {
-
-//     }
-// }
+class Game {
+    constructor () {
+        // drawPile = [];
+        this.draw = () => {
+            let a = player1[0];
+            let b = player2[0];
+            if (a.Value > b.Value) {
+                console.log(`Player 1: ${a.Rank} of ${a.Suit}, Player 2: ${b.Rank} of ${b.Suit}. Player 1 won the round!`);
+                // console.log("Player 1 has won the round!");
+                player2.shift();
+                player1.push(b);
+                player1.shift();
+                player1.push(a);
+                console.log(player1, player2);
+                return console.log("Player 1: " + player1.length + ", Player 2: " + player2.length);
+            } else if (b.Value > a.Value) {
+                console.log(`Player 1: ${a.Rank} of ${a.Suit}, Player 2: ${b.Rank} of ${b.Suit}. Player 2 won the round!`);
+                // console.log("Player 2 has won the round!");
+                player1.shift();
+                player2.push(a);
+                player2.shift();
+                player2.push(b);
+                console.log(player1, player2);
+                return console.log("Player 1: " + player1.length + ", Player 2: " + player2.length);
+            }
+            if (player1[0].Rank === player2[0].Rank) {
+                console.log("WAR!!");
+            }
+        }
+        this.draw();
+    }
+}
 
 
 
 newGame = () => {
-    let deck = new Deck();
+    deck = new Deck();
 }
 
+play = () => {
+    playWar = new Game();
+}
 
 
 
 //COMMANDS TO PLAY GAME
 console.log("Let's play a game of War! Type 'newGame();' to begin!");
 
-// newGame();
+newGame();
+
+console.log("Ready to play! Type 'play();'!")
+
+play();
 
 
 
