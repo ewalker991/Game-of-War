@@ -68,14 +68,15 @@ class Game {
             console.log(player1[2], player2[2]);
             warDeck.push(player1[0], player1[1], player1[2], player2[0], player2[1], player2[2]);
             // console.log(`${warDeck.Rank} ${warDeck.Suit}`);
-            return warDeck;
+            return warDeck, roundNum;
         }
 
         this.draw = () => {
             let a = player1[0];
             let b = player2[0];
+            let roundNum = 1;
             if (a.Value > b.Value) {
-                console.log("Round #" + roundNum);
+                console.log("Round #" + roundNum++);
                 console.log(`Player 1: ${a.Rank} of ${a.Suit}, Player 2: ${b.Rank} of ${b.Suit}. Player 1 won Round ${roundNum}!`);
                 // console.log("Player 1 has won the round!");
                 player2.shift();
@@ -84,7 +85,9 @@ class Game {
                 player1.push(a);
                 // console.log(player1, player2);
                 console.log("Player 1: " + player1.length + ", Player 2: " + player2.length);
-                return player1, player2;
+                // roundNum + 1;
+                console.log("Type 'playWar.draw();' to continue!");
+                return player1, player2, roundNum;
             } else if (b.Value > a.Value) {
                 console.log("Round #" + roundNum);
                 console.log(`Player 1: ${a.Rank} of ${a.Suit}, Player 2: ${b.Rank} of ${b.Suit}. Player 2 won Round ${roundNum}!`);
@@ -95,7 +98,9 @@ class Game {
                 player2.push(b);
                 // console.log(player1, player2);
                 console.log("Player 1: " + player1.length + ", Player 2: " + player2.length);
-                return player1, player2;
+                // roundNum + 1;
+                console.log("Type 'playWar.draw();' to continue!");
+                return player1, player2, roundNum;
             } else if (player1[0].Rank === player2[0].Rank) {
                 console.log("Round #" + roundNum);
                 console.log(`Player 1: ${a.Rank} of ${a.Suit}, Player 2: ${b.Rank} of ${b.Suit}.`);
