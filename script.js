@@ -50,6 +50,7 @@ class Deck {
         this.shuffle();
         console.log("Dividing deck for two...");
         this.divide();
+        console.log("Ready to play! Type 'play();' to get started!");
         return this.deck;
     }
 }
@@ -57,8 +58,7 @@ class Deck {
 //making Game class to handle the game mechanics
 class Game {
     constructor () {
-        let a = player1[0];
-        let b = player2[0];
+        
         let roundNum = 1;
         let warDeck = [];
 
@@ -72,6 +72,8 @@ class Game {
         }
 
         this.draw = () => {
+            let a = player1[0];
+            let b = player2[0];
             if (a.Value > b.Value) {
                 console.log("Round #" + roundNum);
                 console.log(`Player 1: ${a.Rank} of ${a.Suit}, Player 2: ${b.Rank} of ${b.Suit}. Player 1 won Round ${roundNum}!`);
@@ -138,12 +140,12 @@ play = () => {
 //COMMANDS TO PLAY GAME
 console.log("Let's play a game of War! Type 'newGame();' to begin!");
 
-newGame();
+// newGame();
 
-console.log("Ready to play! Type 'play();'!")
+// console.log("Ready to play! Type 'play();'!")
 
-play();
-play();
+// play();
+// play();
 
 
 
