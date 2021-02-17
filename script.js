@@ -57,43 +57,66 @@ class Deck {
 //making Game class to handle the game mechanics
 class Game {
     constructor () {
+        let a = player1[0];
+        let b = player2[0];
+        let roundNum = 1;
+        let warDeck = [];
+
+        this.warDraw = () => {
+            console.log(player1[0], player2[0]);
+            console.log(player1[1], player2[1]);
+            console.log(player1[2], player2[2]);
+            warDeck.push(player1[0], player1[1], player1[2], player2[0], player2[1], player2[2]);
+            // console.log(`${warDeck.Rank} ${warDeck.Suit}`);
+            return warDeck;
+        }
+
         this.draw = () => {
-            let a = player1[0];
-            let b = player2[0];
-            let roundNum = 1;
-            for (let i = 0; player1.length < 53 || player2.length < 53; i++) {
-                if (a.Value > b.Value) {
-                    console.log("Round #" + roundNum);
+            if (a.Value > b.Value) {
+                console.log("Round #" + roundNum);
+                console.log(`Player 1: ${a.Rank} of ${a.Suit}, Player 2: ${b.Rank} of ${b.Suit}. Player 1 won Round ${roundNum}!`);
+                // console.log("Player 1 has won the round!");
+                player2.shift();
+                player1.push(b);
+                player1.shift();
+                player1.push(a);
+                // console.log(player1, player2);
+                console.log("Player 1: " + player1.length + ", Player 2: " + player2.length);
+                return player1, player2;
+            } else if (b.Value > a.Value) {
+                console.log("Round #" + roundNum);
+                console.log(`Player 1: ${a.Rank} of ${a.Suit}, Player 2: ${b.Rank} of ${b.Suit}. Player 2 won Round ${roundNum}!`);
+                // console.log("Player 2 has won the round!");
+                player1.shift();
+                player2.push(a);
+                player2.shift();
+                player2.push(b);
+                // console.log(player1, player2);
+                console.log("Player 1: " + player1.length + ", Player 2: " + player2.length);
+                return player1, player2;
+            } else if (player1[0].Rank === player2[0].Rank) {
+                console.log("Round #" + roundNum);
+                console.log(`Player 1: ${a.Rank} of ${a.Suit}, Player 2: ${b.Rank} of ${b.Suit}.`);
+                console.log("WAR!!");
+
+                this.warDraw();
+
+                if (player1[2].Value > player2[2].Value) {
                     console.log(`Player 1: ${a.Rank} of ${a.Suit}, Player 2: ${b.Rank} of ${b.Suit}. Player 1 won Round ${roundNum}!`);
-                    // console.log("Player 1 has won the round!");
-                    player2.shift();
-                    player1.push(b);
-                    player1.shift();
-                    player1.push(a);
-                    // console.log(player1, player2);
-                    console.log("Player 1: " + player1.length + ", Player 2: " + player2.length);
-                    return player1, player2
-                } else if (b.Value > a.Value) {
-                    console.log("Round #" + roundNum);
-                    console.log(`Player 1: ${a.Rank} of ${a.Suit}, Player 2: ${b.Rank} of ${b.Suit}. Player 2 won Round ${roundNum}!`);
-                    // console.log("Player 2 has won the round!");
-                    player1.shift();
-                    player2.push(a);
-                    player2.shift();
-                    player2.push(b);
-                    // console.log(player1, player2);
-                    console.log("Player 1: " + player1.length + ", Player 2: " + player2.length);
-                    return player1, player2;
-                } else if (player1[0].Rank == player2[0].Rank) {
-                    console.log("Round #" + roundNum);
-                    console.log(`Player 1: ${a.Rank} of ${a.Suit}, Player 2: ${b.Rank} of ${b.Suit}.`);
-                    console.log("WAR!!");
-                } else if (player1.length === 52) {
-                    console.log("Player 1 won the Game of War at Round " + roundNum + "! Yay!");
-                } else if (player2.length === 52) {
-                    console.log("Player 2 won the Game of War at Round " + roundNUm + "! Yay!");
-                }
-                roundNum++
+                    warDeck.splice(0, 6);
+                    player1.push();
+                    return console.log("Player 1: " + player1.length + ", Player 2: " + player2.length);
+                } else if (player2[2].Value > player1[2].Value)
+                    console.log(`Player 1: ${a.Rank} of ${a.Suit}, Player 2: ${b.Rank} of ${b.Suit}. Player 1 won Round ${roundNum}!`);
+                    warDeck.splice(0, 6);
+                    player2.push();
+                    return console.log("Player 1: " + player1.length + ", Player 2: " + player2.length);
+                    
+
+            } else if (player1.length === 0) {
+                console.log("Player 2 won the Game of War at Round " + roundNum + "! Yay!");
+            } else if (player2.length === 0) {
+                console.log("Player 1 won the Game of War at Round " + roundNUm + "! Yay!");
             }
         }
         this.draw();
@@ -119,6 +142,7 @@ newGame();
 
 console.log("Ready to play! Type 'play();'!")
 
+play();
 play();
 
 
