@@ -54,34 +54,46 @@ class Deck {
     }
 }
 
-//making Game class to handle the war mechanic?
+//making Game class to handle the game mechanics
 class Game {
     constructor () {
-        // drawPile = [];
         this.draw = () => {
             let a = player1[0];
             let b = player2[0];
-            if (a.Value > b.Value) {
-                console.log(`Player 1: ${a.Rank} of ${a.Suit}, Player 2: ${b.Rank} of ${b.Suit}. Player 1 won the round!`);
-                // console.log("Player 1 has won the round!");
-                player2.shift();
-                player1.push(b);
-                player1.shift();
-                player1.push(a);
-                console.log(player1, player2);
-                return console.log("Player 1: " + player1.length + ", Player 2: " + player2.length);
-            } else if (b.Value > a.Value) {
-                console.log(`Player 1: ${a.Rank} of ${a.Suit}, Player 2: ${b.Rank} of ${b.Suit}. Player 2 won the round!`);
-                // console.log("Player 2 has won the round!");
-                player1.shift();
-                player2.push(a);
-                player2.shift();
-                player2.push(b);
-                console.log(player1, player2);
-                return console.log("Player 1: " + player1.length + ", Player 2: " + player2.length);
-            }
-            if (player1[0].Rank === player2[0].Rank) {
-                console.log("WAR!!");
+            let roundNum = 1;
+            for (let i = 0; player1.length < 53 || player2.length < 53; i++) {
+                if (a.Value > b.Value) {
+                    console.log("Round #" + roundNum);
+                    console.log(`Player 1: ${a.Rank} of ${a.Suit}, Player 2: ${b.Rank} of ${b.Suit}. Player 1 won Round ${roundNum}!`);
+                    // console.log("Player 1 has won the round!");
+                    player2.shift();
+                    player1.push(b);
+                    player1.shift();
+                    player1.push(a);
+                    // console.log(player1, player2);
+                    console.log("Player 1: " + player1.length + ", Player 2: " + player2.length);
+                    return player1, player2
+                } else if (b.Value > a.Value) {
+                    console.log("Round #" + roundNum);
+                    console.log(`Player 1: ${a.Rank} of ${a.Suit}, Player 2: ${b.Rank} of ${b.Suit}. Player 2 won Round ${roundNum}!`);
+                    // console.log("Player 2 has won the round!");
+                    player1.shift();
+                    player2.push(a);
+                    player2.shift();
+                    player2.push(b);
+                    // console.log(player1, player2);
+                    console.log("Player 1: " + player1.length + ", Player 2: " + player2.length);
+                    return player1, player2;
+                } else if (player1[0].Rank == player2[0].Rank) {
+                    console.log("Round #" + roundNum);
+                    console.log(`Player 1: ${a.Rank} of ${a.Suit}, Player 2: ${b.Rank} of ${b.Suit}.`);
+                    console.log("WAR!!");
+                } else if (player1.length === 52) {
+                    console.log("Player 1 won the Game of War at Round " + roundNum + "! Yay!");
+                } else if (player2.length === 52) {
+                    console.log("Player 2 won the Game of War at Round " + roundNUm + "! Yay!");
+                }
+                roundNum++
             }
         }
         this.draw();
